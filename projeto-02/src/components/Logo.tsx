@@ -1,4 +1,4 @@
-import { SVGProps } from 'react'
+import { SVGProps } from 'react';
 
 interface LogoProps extends SVGProps<SVGSVGElement> {}
 
@@ -27,5 +27,5 @@ export function Logo({ ...props }: LogoProps) {
         d="M28.196 12.054l-4.91 18.323L9.617 16.7l18.313-4.913c.166-.05.315.1.266.266z"
       ></path>
     </svg>
-  )
+  );
 }
