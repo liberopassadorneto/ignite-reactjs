@@ -1,3 +1,6 @@
 {
-  "extends": "@liberopneto/eslint-config/react"
+  "extends": "@liberopneto/eslint-config/react",
+  "eslint:recommended",
+  "plugin:@typescript-eslint/eslint-recommended",
+  "plugin:@typescript-eslint/recommended",
 }

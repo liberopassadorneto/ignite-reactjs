@@ -1,17 +1,25 @@
-import { createContext, ReactNode, useState } from 'react';
+import { differenceInSeconds } from 'date-fns';
+import {
+  createContext,
+  ReactNode,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
+import {
+  createCycleAction,
+  finishCurrentCycleAction,
+  interruptCurrentCycleAction,
+} from '../reducers/cycles/actions';
+import {
+  Cycle,
+  cyclesReducer,
+  defaultCyclesState,
+} from '../reducers/cycles/reducer';
 
-interface CreateNewCycleData {
+interface CreateCycleData {
   task: string;
   minutesAmount: number;
-}
-
-interface Cycle {
-  id: string;
-  task: string;
-  minutesAmount: number;
-  startDate: Date;
-  interruptedDate?: Date;
-  finishedDate?: Date;
 }
 
 interface CycleContextType {
@@ -19,9 +27,9 @@ interface CycleContextType {
   activeCycle: Cycle | undefined;
   activeCycleId: string | null;
   amountSecondsPassed: number;
-  markCurrentCycleAsFinished: () => void;
+  finishCurrentCycle: () => void;
   setSecondsPassed: (seconds: number) => void;
-  createNewCycle: (data: CreateNewCycleData) => void;
+  createCycle: (data: CreateCycleData) => void;
   interruptCurrentCycle: () => void;
 }
 
@@ -32,31 +40,44 @@ interface CycleContextProviderProps {
 }
 
 export function CycleContextProvider({ children }: CycleContextProviderProps) {
-  const [cycles, setCycles] = useState<Cycle[]>([]);
-  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
-  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
+  const [cyclesState, dispatch] = useReducer(
+    cyclesReducer,
+    defaultCyclesState,
+    () => {
+      const stateJSON = localStorage.getItem(
+        '@ignite-timer:cycles-state-1.0.0',
+      );
 
+      if (stateJSON) {
+        return JSON.parse(stateJSON);
+      }
+
+      return defaultCyclesState;
+    },
+  );
+
+  const { cycles, activeCycleId } = cyclesState;
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
-  function markCurrentCycleAsFinished() {
-    setCycles((state) =>
-      state.map((cycle) => {
-        if (cycle.id === activeCycleId) {
-          return Object.assign(cycle, {
-            finishedDate: new Date(),
-          });
-        } else {
-          return cycle;
-        }
-      }),
-    );
-  }
+  const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
+    if (activeCycle) {
+      return differenceInSeconds(new Date(), new Date(activeCycle.startDate));
+    }
+
+    return 0;
+  });
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cyclesState);
+
+    localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJSON);
+  }, [cyclesState]);
 
   function setSecondsPassed(seconds: number) {
     setAmountSecondsPassed(seconds);
   }
 
-  function createNewCycle(data: CreateNewCycleData) {
+  function createCycle(data: CreateCycleData) {
     const id = String(new Date().getTime());
 
     const newCycle: Cycle = {
@@ -66,25 +87,17 @@ export function CycleContextProvider({ children }: CycleContextProviderProps) {
       startDate: new Date(),
     };
 
-    setCycles((state) => [...state, newCycle]);
-    setActiveCycleId(id);
+    dispatch(createCycleAction(newCycle));
+
     setAmountSecondsPassed(0);
   }
 
   function interruptCurrentCycle() {
-    setCycles((state) =>
-      state.map((cycle) => {
-        if (cycle.id === activeCycleId) {
-          return Object.assign(cycle, {
-            interruptedDate: new Date(),
-          });
-        } else {
-          return cycle;
-        }
-      }),
-    );
+    dispatch(interruptCurrentCycleAction());
+  }
 
-    setActiveCycleId(null);
+  function finishCurrentCycle() {
+    dispatch(finishCurrentCycleAction());
   }
 
   return (
@@ -93,10 +106,10 @@ export function CycleContextProvider({ children }: CycleContextProviderProps) {
         cycles,
         activeCycle,
         activeCycleId,
-        markCurrentCycleAsFinished,
+        finishCurrentCycle,
         amountSecondsPassed,
         setSecondsPassed,
-        createNewCycle,
+        createCycle,
         interruptCurrentCycle,
       }}
     >
