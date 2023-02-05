@@ -15,6 +15,22 @@
       "category": "food",
       "price": 80,
       "createdAt": "2019-02-02T00:00:00.000Z"
+    },
+    {
+      "category": "Job",
+      "description": "Backend dev",
+      "price": 10000,
+      "type": "income",
+      "createdAt": "2023-02-05T21:29:46.570Z",
+      "id": 3
+    },
+    {
+      "category": "fit",
+      "description": "vitamina",
+      "price": 10,
+      "type": "income",
+      "createdAt": "2023-02-05T21:50:30.714Z",
+      "id": 4
     }
   ]
 }

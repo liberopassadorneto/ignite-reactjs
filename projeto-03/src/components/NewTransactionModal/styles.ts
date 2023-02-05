@@ -96,7 +96,7 @@ interface TransactionTypeItemProps {
 }
 
 export const TransactionTypeItem = styled(
-  RadioGroup.Item
+  RadioGroup.Item,
 )<TransactionTypeItemProps>`
   background-color: ${(props) => props.theme['gray-700']};
   color: ${(props) => props.theme['gray-300']};

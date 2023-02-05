@@ -1,0 +1,3 @@
+{
+  "extends": "@liberopneto/eslint-config/react"
+}

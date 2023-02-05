@@ -1,6 +1,11 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as Dialog from '@radix-ui/react-dialog';
-import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
+import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react';
+import { useContext } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { TransactionsContext } from '../../contexts/TransactionsContext';
 import {
   DialogClose,
   DialogContent,
@@ -8,33 +13,46 @@ import {
   TransactionTypeItem,
   TransactionTypeRoot,
 } from './styles';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 
 const newTransactionFormSchema = z.object({
   description: z.string().min(3),
   price: z.number().min(0),
   category: z.string().min(3),
-  // type: z.enum(['income', 'outcome']),
+  type: z.enum(['income', 'outcome']),
 });
 
 type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema>;
 
 export function NewTransactionModal() {
+  const { createTransaction } = useContext(TransactionsContext);
+
   const {
     register,
     handleSubmit,
+    control,
     formState: { isSubmitting },
+    reset,
   } = useForm<NewTransactionFormInputs>({
     resolver: zodResolver(newTransactionFormSchema),
+    defaultValues: {
+      type: 'income',
+    },
   });
 
   async function handleCreateNewTransaction(data: NewTransactionFormInputs) {
     // simulate a request with delay
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    console.log(data);
+    const { category, description, price, type } = data;
+
+    createTransaction({
+      category,
+      description,
+      price,
+      type,
+    });
+
+    reset();
   }
 
   return (
@@ -70,16 +88,27 @@ export function NewTransactionModal() {
 
           <RadioGroup.Root></RadioGroup.Root>
 
-          <TransactionTypeRoot>
-            <TransactionTypeItem variant="income" value="income">
-              <ArrowCircleUp size={24} />
-              Income
-            </TransactionTypeItem>
-            <TransactionTypeItem variant="outcome" value="outcome">
-              <ArrowCircleDown size={24} />
-              Outcome
-            </TransactionTypeItem>
-          </TransactionTypeRoot>
+          <Controller
+            control={control}
+            name="type"
+            render={({ field }) => {
+              return (
+                <TransactionTypeRoot
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <TransactionTypeItem variant="income" value="income">
+                    <ArrowCircleUp size={24} />
+                    Income
+                  </TransactionTypeItem>
+                  <TransactionTypeItem variant="outcome" value="outcome">
+                    <ArrowCircleDown size={24} />
+                    Outcome
+                  </TransactionTypeItem>
+                </TransactionTypeRoot>
+              );
+            }}
+          />
 
           <button type="submit" disabled={isSubmitting}>
             Create transaction

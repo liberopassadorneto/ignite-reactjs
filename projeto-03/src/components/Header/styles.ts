@@ -21,7 +21,7 @@ export const TransactionButton = styled.button`
   border: 0;
 
   background: ${({ theme }) => theme['green-500']};
-  color: ${({ theme }) => theme['white']};
+  color: ${({ theme }) => theme.white};
 
   font-weight: bold;
   padding: 0 1.25rem;
