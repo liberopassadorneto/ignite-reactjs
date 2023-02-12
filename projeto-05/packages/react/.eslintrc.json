@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@liberopneto-ui/eslint-config"
+  ]
+}

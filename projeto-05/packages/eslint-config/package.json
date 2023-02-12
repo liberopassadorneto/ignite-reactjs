@@ -1,0 +1,11 @@
+{
+  "name": "@liberopneto-ui/eslint-config",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js",
+  "devDependencies": {
+    "@liberopneto/eslint-config": "^1.0.0",
+    "eslint": "^8.34.0"
+  }
+}
