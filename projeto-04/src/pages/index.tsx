@@ -1,3 +1,4 @@
+import { IProduct } from '@/interfaces/product';
 import { stripe } from '@/libs/stripe';
 import { HomeContainer, Product } from '@/styles/pages/home';
 import 'keen-slider/keen-slider.min.css';
@@ -5,16 +6,10 @@ import { useKeenSlider } from 'keen-slider/react';
 import { GetStaticProps } from 'next';
 import Image from 'next/image';
 import Stripe from 'stripe';
-
-interface Product {
-  id: string;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
+import Head from 'next/head';
 
 interface HomeProps {
-  products: Product[];
+  products: IProduct[];
 }
 
 export default function Home({ products }: HomeProps) {
@@ -26,25 +21,37 @@ export default function Home({ products }: HomeProps) {
   });
 
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-      {products.map((product) => {
-        return (
-          <Product className="keen-slider__slide" key={product.id}>
-            <Image
-              src={product.imageUrl}
-              width={520}
-              height={480}
-              alt="t-shirt"
-            />
+    <>
+      <Head>
+        <title>Home | Ignite Shop</title>
+      </Head>
 
-            <footer>
-              <strong>{product.name}</strong>
-              <span>{product.price}</span>
-            </footer>
-          </Product>
-        );
-      })}
-    </HomeContainer>
+      <HomeContainer ref={sliderRef} className="keen-slider">
+        {products.map((product) => {
+          return (
+            <Product
+              key={product.id}
+              href={`/product/${product.id}`}
+              className="keen-slider__slide"
+              // faz o prefetch somente no hover
+              prefetch={false}
+            >
+              <Image
+                src={product.imageUrl}
+                width={520}
+                height={480}
+                alt="t-shirt"
+              />
+
+              <footer>
+                <strong>{product.name}</strong>
+                <span>{product.price}</span>
+              </footer>
+            </Product>
+          );
+        })}
+      </HomeContainer>
+    </>
   );
 }
 
