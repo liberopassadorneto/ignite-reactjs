@@ -16,5 +16,11 @@ var colors = {
   ignite900: "#00291D"
 };
 
-// src/index.ts
-console.log(colors);
+// src/index.tsx
+import { Fragment, jsx } from "react/jsx-runtime";
+function App() {
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("h1", { style: { color: colors.ignite300 }, children: "App" }) });
+}
+export {
+  App
+};
