@@ -834,7 +834,8 @@ interface AvatarProps extends ComponentProps<typeof AvatarImage> {
 declare function Avatar(props: AvatarProps): JSX.Element;
 
 declare const Button: _stitches_react_types_styled_component.StyledComponent<"button", {
-    variant?: "primary" | undefined;
+    variant?: "primary" | "secondary" | "tertiary" | undefined;
+    size?: "sm" | "md" | undefined;
 }, {}, _stitches_react_types_css_util.CSS<{}, {
     colors: {
         readonly white: "#FFF";
