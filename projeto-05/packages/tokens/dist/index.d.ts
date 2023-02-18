@@ -1,12 +1,3 @@
-declare const borderRadius: {
-    readonly px: "1px";
-    readonly xs: "4px";
-    readonly sm: "6px";
-    readonly md: "8px";
-    readonly lg: "16px";
-    readonly full: "99999px";
-};
-
 declare const colors: {
     readonly white: "#FFF";
     readonly black: "#000";
@@ -58,6 +49,15 @@ declare const lineHeights: {
     readonly tall: "180%";
 };
 
+declare const radii: {
+    readonly px: "1px";
+    readonly xs: "4px";
+    readonly sm: "6px";
+    readonly md: "8px";
+    readonly lg: "16px";
+    readonly full: "99999px";
+};
+
 declare const space: {
     readonly 1: "0.25rem";
     readonly 2: "0.5rem";
@@ -76,4 +76,4 @@ declare const space: {
     readonly 80: "20rem";
 };
 
-export { borderRadius, colors, fontSizes, fontWeights, fonts, lineHeights, space };
+export { colors, fontSizes, fontWeights, fonts, lineHeights, radii, space };

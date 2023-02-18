@@ -1,13 +1,3 @@
-// src/border-radius.ts
-var borderRadius = {
-  px: "1px",
-  xs: "4px",
-  sm: "6px",
-  md: "8px",
-  lg: "16px",
-  full: "99999px"
-};
-
 // src/colors.ts
 var colors = {
   white: "#FFF",
@@ -64,6 +54,16 @@ var lineHeights = {
   tall: "180%"
 };
 
+// src/radii.ts
+var radii = {
+  px: "1px",
+  xs: "4px",
+  sm: "6px",
+  md: "8px",
+  lg: "16px",
+  full: "99999px"
+};
+
 // src/space.ts
 var space = {
   1: "0.25rem",
@@ -83,11 +83,11 @@ var space = {
   80: "20rem"
 };
 export {
-  borderRadius,
   colors,
   fontSizes,
   fontWeights,
   fonts,
   lineHeights,
+  radii,
   space
 };

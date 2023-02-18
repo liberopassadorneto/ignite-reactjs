@@ -2,17 +2,11 @@ import { Button, ButtonProps } from '@liberopneto-ui/react';
 import { Meta, StoryObj } from '@storybook/react';
 
 export default {
-  title: 'Button',
+  title: 'Form/Button',
   component: Button,
   args: {
-    children: 'Button',
+    children: 'Send',
   },
 } as Meta<ButtonProps>;
 
 export const Primary: StoryObj<ButtonProps> = {};
-
-export const Big: StoryObj<ButtonProps> = {
-  args: {
-    size: 'big',
-  },
-};
