@@ -21,5 +21,7 @@ export function MultiStep({ steps, currentStep = 1 }: MultiStepProps) {
   );
 }
 
+MultiStep.displayName = 'MultiStep';
+
 // Array.from({ length: 4 }, (_, i) => i + 1)
 // [1, 2, 3, 4]

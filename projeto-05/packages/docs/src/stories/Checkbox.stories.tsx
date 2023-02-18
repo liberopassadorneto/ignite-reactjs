@@ -5,6 +5,13 @@ export default {
   title: 'Form/Checkbox',
   component: Checkbox,
   args: {},
+  argTypes: {
+    src: {
+      control: {
+        type: 'text',
+      },
+    },
+  },
   decorators: [
     (Story) => {
       return (

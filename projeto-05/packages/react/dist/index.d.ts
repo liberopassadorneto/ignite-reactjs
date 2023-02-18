@@ -211,6 +211,9 @@ declare const AvatarImage: _stitches_react_types_styled_component.StyledComponen
 interface AvatarProps extends ComponentProps<typeof AvatarImage> {
 }
 declare function Avatar(props: AvatarProps): JSX.Element;
+declare namespace Avatar {
+    var displayName: string;
+}
 
 declare const Box: _stitches_react_types_styled_component.StyledComponent<"div", {}, {}, _stitches_react_types_css_util.CSS<{}, {
     colors: {
@@ -833,6 +836,9 @@ declare const CheckboxRoot: _stitches_react_types_styled_component.StyledCompone
 interface CheckboxProps extends ComponentProps<typeof CheckboxRoot> {
 }
 declare function Checkbox(props: CheckboxProps): JSX.Element;
+declare namespace Checkbox {
+    var displayName: string;
+}
 
 declare const Heading: _stitches_react_types_styled_component.StyledComponent<"h2", {
     size?: "sm" | "md" | "lg" | "xl" | "2xl" | "4xl" | "5xl" | "3xl" | undefined;
@@ -1047,6 +1053,9 @@ interface MultiStepProps {
     currentStep?: number;
 }
 declare function MultiStep({ steps, currentStep }: MultiStepProps): JSX.Element;
+declare namespace MultiStep {
+    var displayName: string;
+}
 
 declare const Text: _stitches_react_types_styled_component.StyledComponent<"p", {
     size?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl" | "9xl" | undefined;

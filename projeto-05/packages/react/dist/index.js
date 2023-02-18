@@ -209,6 +209,7 @@ function Avatar2(props) {
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, { delayMs: 600, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_phosphor_react.User, {}) })
   ] });
 }
+Avatar2.displayName = "Avatar";
 
 // src/components/Box.tsx
 var Box = styled("div", {
@@ -217,6 +218,7 @@ var Box = styled("div", {
   backgroundColor: "$gray800",
   border: "1px solid $gray600"
 });
+Box.displayName = "Box";
 
 // src/components/Button.tsx
 var Button = styled("button", {
@@ -289,6 +291,7 @@ var Button = styled("button", {
     size: "md"
   }
 });
+Button.displayName = "Button";
 
 // src/components/Checkbox/index.tsx
 var import_phosphor_react2 = require("phosphor-react");
@@ -341,6 +344,7 @@ var import_jsx_runtime2 = require("react/jsx-runtime");
 function Checkbox2(props) {
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(CheckboxRoot, __spreadProps(__spreadValues({}, props), { children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(CheckboxIndicator, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_phosphor_react2.Check, { weight: "bold" }) }) }));
 }
+Checkbox2.displayName = "Checkbox";
 
 // src/components/Heading.tsx
 var Heading = styled("h2", {
@@ -364,6 +368,7 @@ var Heading = styled("h2", {
     size: "md"
   }
 });
+Heading.displayName = "Heading";
 
 // src/components/Text.tsx
 var Text = styled("p", {
@@ -392,6 +397,7 @@ var Text = styled("p", {
     size: "md"
   }
 });
+Text.displayName = "Text";
 
 // src/components/MultiStep/styles.ts
 var MultiStepContainer = styled("div", {});
@@ -434,6 +440,7 @@ function MultiStep({ steps, currentStep = 1 }) {
     }) })
   ] });
 }
+MultiStep.displayName = "MultiStep";
 
 // src/components/TextArea.tsx
 var TextArea = styled("textarea", {
@@ -460,6 +467,7 @@ var TextArea = styled("textarea", {
     color: "$gray400"
   }
 });
+TextArea.displayName = "TextArea";
 
 // src/components/TextInput/index.tsx
 var import_react2 = require("react");
