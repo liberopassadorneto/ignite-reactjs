@@ -1,1 +1,4 @@
-/storybook-static
+node_modules
+dist
+.turbo
+storybook-static
